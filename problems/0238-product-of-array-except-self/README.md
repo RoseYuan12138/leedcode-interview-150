@@ -1,51 +1,50 @@
 # 238. Product of Array Except Self
 
-- 完成日期：2026-08-08
-- 完成时间：23:21:36 PDT（America/Los_Angeles，UTC-07:00）
-- 难度：Medium
-- 题目链接：[Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
-- 提交结果：正确
+- Completion date: 2026-08-08
+- Completion time: 23:21:36 PDT (America/Los_Angeles, UTC-07:00)
+- Difficulty: Medium
+- Problem: [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
+- Result: Correct
 
-## 题目概述
+## Problem Summary
 
-给定整数数组 `nums`，返回数组 `answer`，其中 `answer[i]` 是除 `nums[i]` 之外所有元素的乘积。要求在线性时间内完成，并且不能使用除法。
+Given an integer array `nums`, return an array `answer` where `answer[i]` is the product of every element except `nums[i]`. The solution must run in linear time without using division.
 
-## 我的题解
+## Submitted Solution
 
-代码见 [`user_solution.py`](./user_solution.py)。
+See [`user_solution.py`](./user_solution.py).
 
-分别构建两个数组：
+The submitted solution builds two arrays:
 
-- `prefixes[i]` 保存下标 `i` 左侧全部元素的乘积。
-- 反转后的 `suffixes[i]` 保存下标 `i` 右侧全部元素的乘积。
-- 两者相乘得到 `answer[i]`。
+- `prefixes[i]` stores the product of all elements to the left of index `i`.
+- After reversal, `suffixes[i]` stores the product of all elements to the right of index `i`.
+- Multiplying these values produces `answer[i]`.
 
-复杂度：
+Complexity:
 
-- 时间复杂度：`O(n)`。
-- 额外空间复杂度：`O(n)`，因为额外维护了 `prefixes` 和 `suffixes`。
+- Time: `O(n)`.
+- Auxiliary space: `O(n)` because `prefixes` and `suffixes` are stored separately.
 
-## 标准题解
+## Reference Solution
 
-代码见 [`standard_solution.py`](./standard_solution.py)。
+See [`standard_solution.py`](./standard_solution.py).
 
-先把每个位置左侧的乘积写入返回数组，再从右向左维护一个滚动的后缀乘积，并直接乘到返回数组对应位置。这样无需单独保存前缀和后缀数组。
+First, write the product of all preceding elements into each position of the output array. Then traverse from right to left, maintaining a rolling suffix product and multiplying it directly into the corresponding output position. This avoids separate prefix and suffix arrays.
 
-复杂度：
+Complexity:
 
-- 时间复杂度：`O(n)`。
-- 额外空间复杂度：`O(1)`；按照题目约定，返回数组不计入额外空间。
+- Time: `O(n)`.
+- Auxiliary space: `O(1)` when the output array is excluded, as specified by the problem.
 
-## 错题分析与优化建议
+## Correctness Analysis and Optimization Notes
 
-### 正确性
+### Correctness
 
-本次题解没有逻辑错误。前缀与后缀的定义正确，也能正确处理数组中包含一个或多个 `0` 的情况，没有使用题目禁止的除法。
+The submitted solution has no logical errors. Its prefix and suffix definitions are correct, it handles arrays containing one or more zeroes, and it does not use division.
 
-### 可以优化的地方
+### Optimization Opportunities
 
-1. `prefixes` 和 `suffixes` 都占用 `O(n)` 空间，可以复用输出数组存放前缀积，并使用单个变量滚动维护后缀积，将额外空间降为 `O(1)`。
-2. `nums[::-1]` 会创建一个完整的数组副本。可以改用倒序索引遍历，避免这部分额外内存。
-3. 提交代码中保留了两个 `print` 调试语句。它们不影响结果，但会产生无关输出，并增加大输入下的运行开销，正式提交前应删除。
-4. `start = start * i` 可以简写为 `start *= i`，让累乘意图更直接。
-
+1. Both `prefixes` and `suffixes` use `O(n)` space. The output array can store prefix products while a single variable tracks the rolling suffix product, reducing auxiliary space to `O(1)`.
+2. `nums[::-1]` creates a full copy of the input. Iterating over indices in reverse avoids that additional allocation.
+3. The two debugging `print` statements do not affect correctness, but they produce unrelated output and add overhead for large inputs. They should be removed before submission.
+4. `start = start * i` can be written as `start *= i` to express the accumulation more directly.
