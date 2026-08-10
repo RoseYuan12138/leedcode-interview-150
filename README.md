@@ -7,3 +7,4 @@ One randomly selected problem from the [Top Interview 150](https://leetcode.com/
 | Day | Completed (America/Los_Angeles) | Problem | Result |
 | --- | --- | --- | --- |
 | 1 / 150 | 2026-08-08 23:21:36 PDT | [#238 Product of Array Except Self](./problems/0238-product-of-array-except-self/) | ✅ Correct |
+| 2 / 150 | 2026-08-10 00:59:46 PDT | [#128 Longest Consecutive Sequence](./problems/0128-longest-consecutive-sequence/) | ✅ Correct |
